@@ -132,13 +132,17 @@ def test_elasticnet_regularization():
 
     # Test boundary conditions for l1_ratio
     # When l1_ratio = 1, should be equivalent to Lasso
-    elasticnet_as_lasso = model.elasticnet_regularization(dw, m, C, l1_ratio=1.0)
-    np.testing.assert_array_almost_equal(elasticnet_as_lasso, [0.11, 0.19, -0.1, 0.31])
+    elasticnet_as_lasso = model.elasticnet_regularization(
+        dw, m, C, l1_ratio=1.0)
+    np.testing.assert_array_almost_equal(
+        elasticnet_as_lasso, [0.11, 0.19, -0.1, 0.31])
 
     # When l1_ratio = 0, should be equivalent to Ridge
 
-    elasticnet_as_ridge = model.elasticnet_regularization(dw, m, C, l1_ratio=0.0)
-    np.testing.assert_array_almost_equal(elasticnet_as_ridge, [0.11, 0.18, -0.1, 0.33])
+    elasticnet_as_ridge = model.elasticnet_regularization(
+        dw, m, C, l1_ratio=0.0)
+    np.testing.assert_array_almost_equal(
+        elasticnet_as_ridge, [0.11, 0.18, -0.1, 0.33])
 
     # Test with different C values
     C_strong = 10.0  # stronger regularization
@@ -183,6 +187,6 @@ def test_maximum_likelihood():
     y_true = np.array([0, 1, 1, 0])
     y_pred = np.array([0.1, 0.9, 0.8, 0.2])
 
-    loss = LogisticRegressor.maximum_likelihood(y_true, y_pred)
+    loss = LogisticRegressor.log_likelihood(y_true, y_pred)
     assert isinstance(loss, float)
     assert loss >= 0
